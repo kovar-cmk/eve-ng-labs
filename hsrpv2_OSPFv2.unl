@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="hsrpv2_OSPFv2" version="1" scripttimeout="300" lock="0">
+  <topology>
+    <nodes>
+      <node id="3" name="Switch" type="qemu" template="viosl2" image="viosl2-adventerprisek9-m.156-2.T" console="telnet" cpu="1" cpulimit="0" ram="512" ethernet="8" uuid="a07acf06-602c-43f2-aaf1-2e3ba575ed13" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Switch L3.png" config="0" left="738" top="222">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="2"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="5"/>
+        <interface id="2" name="Gi0/2" type="ethernet" network_id="3"/>
+        <interface id="3" name="Gi0/3" type="ethernet" network_id="4"/>
+      </node>
+      <node id="4" name="VPC4" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="486" top="192">
+        <interface id="0" name="eth0" type="ethernet" network_id="3"/>
+      </node>
+      <node id="5" name="VPC" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="477" top="321">
+        <interface id="0" name="eth0" type="ethernet" network_id="4"/>
+      </node>
+      <node id="1" name="NXOS1" type="qemu" template="nxosv9k" image="nxosv9k-nxosv.9.3.2" console="telnet" cpu="2" cpulimit="0" ram="5192" ethernet="8" uuid="c25aec55-78b3-4897-aa66-54f09eabfea8" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -enable-kvm" qemu_version="4.1.0" qemu_arch="x86_64" delay="0" icon="Nexus7K.png" config="0" left="1032" top="291">
+        <interface id="1" name="E1/1" type="ethernet" network_id="1"/>
+        <interface id="2" name="E1/2" type="ethernet" network_id="5"/>
+      </node>
+      <node id="2" name="NXOS2" type="qemu" template="nxosv9k" image="nxosv9k-nxosv.9.3.2" console="telnet" cpu="2" cpulimit="0" ram="5192" ethernet="8" uuid="e8a28009-1cdb-4b78-b947-42464d7a5970" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -enable-kvm" qemu_version="4.1.0" qemu_arch="x86_64" delay="0" icon="Nexus7K.png" config="0" left="1035" top="117">
+        <interface id="1" name="E1/1" type="ethernet" network_id="1"/>
+        <interface id="2" name="E1/2" type="ethernet" network_id="2"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="3" type="bridge" name="Net-Switchiface_2" left="435" top="370" visibility="0"/>
+      <network id="4" type="bridge" name="Net-VPCiface_0" left="385" top="310" visibility="0"/>
+      <network id="1" type="bridge" name="Net-NXOS2iface_1" left="1095" top="311" visibility="0"/>
+      <network id="2" type="bridge" name="Net-NXOS2iface_2" left="1095" top="387" visibility="0"/>
+      <network id="5" type="bridge" name="Net-NXOS1iface_2" left="1092" top="341" visibility="0"/>
+    </networks>
+  </topology>
+  <objects>
+    <textobjects>
+      <textobject id="1" name="txt 1" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDEiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSBqdGstZHJhZ2dhYmxlIHVpLXJlc2l6YWJsZS1hdXRvaGlkZSIgZGF0YS1wYXRoPSIxIiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDEwNzRweDsgdG9wOiAyMzdweDsgY3Vyc29yOiBtb3ZlOyB6LWluZGV4OiAxMDAxOyBoZWlnaHQ6IDgxcHg7IHdpZHRoOiBhdXRvOyIgYmlzX3NraW5fY2hlY2tlZD0iMSI+PHAgYWxpZ249ImNlbnRlciIgc3R5bGU9InZlcnRpY2FsLWFsaWduOiB0b3A7IGNvbG9yOiByZ2IoMCwgMCwgMCk7IGJhY2tncm91bmQtY29sb3I6IHJnYigyNTUsIDI1NSwgMjU1KTsgZm9udC1zaXplOiAzMi40cHg7IGZvbnQtd2VpZ2h0OiBub3JtYWw7IiBjb250ZW50ZWRpdGFibGU9ImZhbHNlIiBjbGFzcz0iIj4xMC4xMC4xMC4wLzMyPGJyPiAgICAgICAgPC9wPjwvZGl2Pg==</data>
+      </textobject>
+      <textobject id="2" name="txt 2" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDIiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSBqdGstZHJhZ2dhYmxlIGRyYWdzdG9wcGVkIHVpLXJlc2l6YWJsZSIgZGF0YS1wYXRoPSIyIiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDg0MHB4OyB0b3A6IDIyNXB4OyBjdXJzb3I6IG1vdmU7IHotaW5kZXg6IDEwMDE7IGhlaWdodDogODFweDsgd2lkdGg6IGF1dG87IiBiaXNfc2tpbl9jaGVja2VkPSIxIj48cCBhbGlnbj0iY2VudGVyIiBzdHlsZT0idmVydGljYWwtYWxpZ246IHRvcDsgY29sb3I6IHJnYigwLCAwLCAwKTsgYmFja2dyb3VuZC1jb2xvcjogcmdiKDI1NSwgMjU1LCAyNTUpOyBmb250LXNpemU6IDMyLjRweDsgZm9udC13ZWlnaHQ6IG5vcm1hbDsiIGNvbnRlbnRlZGl0YWJsZT0iZmFsc2UiIGNsYXNzPSIiPjE5Mi4xNjguMC4wLzMyPGJyPiAgICAgICAgPC9wPjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLWUiIHN0eWxlPSJ6LWluZGV4OiA5MDsgZGlzcGxheTogYmxvY2s7IiBiaXNfc2tpbl9jaGVja2VkPSIxIj48L2Rpdj48ZGl2IGNsYXNzPSJ1aS1yZXNpemFibGUtaGFuZGxlIHVpLXJlc2l6YWJsZS1zIiBzdHlsZT0iei1pbmRleDogOTA7IGRpc3BsYXk6IGJsb2NrOyIgYmlzX3NraW5fY2hlY2tlZD0iMSI+PC9kaXY+PGRpdiBjbGFzcz0idWktcmVzaXphYmxlLWhhbmRsZSB1aS1yZXNpemFibGUtc2UgdWktaWNvbiB1aS1pY29uLWdyaXBzbWFsbC1kaWFnb25hbC1zZSIgc3R5bGU9InotaW5kZXg6IDkwOyBkaXNwbGF5OiBibG9jazsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjwvZGl2Pg==</data>
+      </textobject>
+    </textobjects>
+  </objects>
+</lab>

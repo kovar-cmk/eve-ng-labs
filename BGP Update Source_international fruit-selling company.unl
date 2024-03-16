@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="BGP Update Source_international fruit-selling company" version="1" scripttimeout="300" lock="0">
+  <description>Scenario:
+As the senior network engineer of a international fruit-selling company you need to configure IBGP within the network. Since your manager wants no SPOF (single point of failure) you decide to add another link between the routers, now the only thing left to do is make sure the logical configuration is also redundant…back to work!
+
+Goal:
+All IP addresses have been preconfigured for you.
+Both routers have a loopback interface:
+Router King: L0: 1.1.1.1 /32
+Router Kong: L0: 2.2.2.2 /32
+Configure EIGRP AS 100 on both routers, advertise all networks.
+Ensure you have full reachability and can ping both loopbacks.
+Configure BGP AS 100 on both routers, do not advertise any networks.
+Make sure that whenever a single link goes down, the BGP neighbor relationship will not reset itself.
+Try this by first shutting down the FastEthernet link, bring it back up and then try the serial link.
+It took me 1000s of hours reading books and doing labs, making mistakes over and over again until I mastered all the routing protocols for CCNP.
+
+Would you like to be a master of routing too? In a short time without having to read 900 page books or google the answers to your questions and browsing through forums?</description>
+  <topology>
+    <nodes>
+      <node id="1" name="vIOS1" type="qemu" template="vios" image="vios-adventerprisek9-m.SPA.156-1.T" console="telnet" cpu="1" cpulimit="0" ram="512" ethernet="4" uuid="868f50dd-9422-4d35-b385-a0cb75fc9701" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Router.png" config="0" left="351" top="231">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="2" name="vIOS2" type="qemu" template="vios" image="vios-adventerprisek9-m.SPA.156-1.T" console="telnet" cpu="1" cpulimit="0" ram="512" ethernet="4" uuid="8dee9545-3d0f-40ed-a778-a4ec0ffaf9c9" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Router.png" config="0" left="681" top="228">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="bridge" name="Net-vIOS1iface_0" left="411" top="271" visibility="0"/>
+      <network id="2" type="bridge" name="Net-vIOS1iface_1" left="411" top="271" visibility="0"/>
+    </networks>
+  </topology>
+  <objects>
+    <textobjects>
+      <textobject id="1" name="circle1" type="circle">
+        <data>PGRpdiBpZD0iY3VzdG9tU2hhcGUxIiBjbGFzcz0iY3VzdG9tU2hhcGUgY29udGV4dC1tZW51IGp0ay1kcmFnZ2FibGUgdWktc2VsZWN0ZWUgdWktcmVzaXphYmxlIGRyYWdzdG9wcGVkIiBkYXRhLXBhdGg9IjEiIHN0eWxlPSJkaXNwbGF5OiBpbmxpbmU7IHotaW5kZXg6IDk5OTsgcG9zaXRpb246IGFic29sdXRlOyBsZWZ0OiAyMzdweDsgdG9wOiAxMzVweDsgd2lkdGg6IDYyMHB4OyBoZWlnaHQ6IDIzOHB4OyIgd2lkdGg9IjEyMHB4IiBoZWlnaHQ9IjEyMHB4IiBuYW1lPSJjaXJjbGUxIiBiaXNfc2tpbl9jaGVja2VkPSIxIj48c3ZnIHdpZHRoPSI2MjAiIGhlaWdodD0iMjM4Ij48ZWxsaXBzZSBjeD0iMzEwIiBjeT0iMTE5IiByeD0iMzA3LjUiIHJ5PSIxMTYuNSIgc3Ryb2tlPSIjZWNmYjEzIiBzdHJva2Utd2lkdGg9IjEwIiBzdHJva2UtZGFzaGFycmF5PSIxMCwxMCIgZmlsbD0iI2U5ZmIxMyI+PC9lbGxpcHNlPlNvcnJ5LCB5b3VyIGJyb3dzZXIgZG9lcyBub3Qgc3VwcG9ydCBpbmxpbmUgU1ZHLjwvc3ZnPjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLWUiIHN0eWxlPSJ6LWluZGV4OiA5MDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLXMiIHN0eWxlPSJ6LWluZGV4OiA5MDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLXNlIHVpLWljb24gdWktaWNvbi1ncmlwc21hbGwtZGlhZ29uYWwtc2UiIHN0eWxlPSJ6LWluZGV4OiA5MDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjwvZGl2Pg==</data>
+      </textobject>
+      <textobject id="2" name="txt 2" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDIiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSBqdGstZHJhZ2dhYmxlIHVpLXNlbGVjdGVlIGRyYWdzdG9wcGVkIHVpLXJlc2l6YWJsZS1hdXRvaGlkZSIgZGF0YS1wYXRoPSIyIiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDM2OXB4OyB0b3A6IDE1OXB4OyBjdXJzb3I6IG1vdmU7IHotaW5kZXg6IDEwMDE7IHdpZHRoOiBhdXRvOyBoZWlnaHQ6IDY1LjEzNzZweDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjxwIGFsaWduPSJjZW50ZXIiIHN0eWxlPSJ2ZXJ0aWNhbC1hbGlnbjogdG9wOyBjb2xvcjogcmdiKDAsIDAsIDApOyBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMjU1LCAyNTUsIDI1NSk7IGZvbnQtc2l6ZTogMzIuNTY4OHB4OyBmb250LXdlaWdodDogbm9ybWFsOyIgY29udGVudGVkaXRhYmxlPSJmYWxzZSIgY2xhc3M9IiI+QVMxMDA8L3A+PC9kaXY+</data>
+      </textobject>
+      <textobject id="3" name="txt 3" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDMiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSB1aS1yZXNpemFibGUganRrLWRyYWdnYWJsZSBkcmFnc3RvcHBlZCIgZGF0YS1wYXRoPSIzIiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDQ1NnB4OyB0b3A6IDIxMHB4OyBjdXJzb3I6IG1vdmU7IHotaW5kZXg6IDEwMDE7IiBiaXNfc2tpbl9jaGVja2VkPSIxIj48cCBhbGlnbj0iY2VudGVyIiBzdHlsZT0idmVydGljYWwtYWxpZ246dG9wO2NvbG9yOiMwMDAwMDA7YmFja2dyb3VuZC1jb2xvcjojZmZmZmZmO2ZvbnQtc2l6ZToyMHB4O2ZvbnQtd2VpZ2h0OiBub3JtYWw7Ij4xIDkyLjE2OC4xMTIuMC8yNCAgICAgICAgPC9wPjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLWUiIHN0eWxlPSJ6LWluZGV4OiA5MDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLXMiIHN0eWxlPSJ6LWluZGV4OiA5MDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjxkaXYgY2xhc3M9InVpLXJlc2l6YWJsZS1oYW5kbGUgdWktcmVzaXphYmxlLXNlIHVpLWljb24gdWktaWNvbi1ncmlwc21hbGwtZGlhZ29uYWwtc2UiIHN0eWxlPSJ6LWluZGV4OiA5MDsiIGJpc19za2luX2NoZWNrZWQ9IjEiPjwvZGl2PjwvZGl2Pg==</data>
+      </textobject>
+      <textobject id="4" name="txt 4" type="text">
+        <data>PGRpdiBpZD0iY3VzdG9tVGV4dDQiIGNsYXNzPSJjdXN0b21TaGFwZSBjdXN0b21UZXh0IGNvbnRleHQtbWVudSB1aS1yZXNpemFibGUganRrLWRyYWdnYWJsZSBkcmFnc3RvcHBlZCIgZGF0YS1wYXRoPSI0IiBzdHlsZT0iZGlzcGxheTogaW5saW5lOyBwb3NpdGlvbjogYWJzb2x1dGU7IGxlZnQ6IDI5NHB4OyB0b3A6IDQwOHB4OyBjdXJzb3I6IG1vdmU7IHotaW5kZXg6IDEwMDE7IiBiaXNfc2tpbl9jaGVja2VkPSIxIj48cCBhbGlnbj0iY2VudGVyIiBzdHlsZT0idmVydGljYWwtYWxpZ246dG9wO2NvbG9yOiMwMDAwMDA7YmFja2dyb3VuZC1jb2xvcjojZmZmZmZmO2ZvbnQtc2l6ZToxMnB4O2ZvbnQtd2VpZ2h0OiBub3JtYWw7Ij4gICAgICAgIEdvYWw6PGJyPkFsbCBJUCBhZGRyZXNzZXMgaGF2ZSBiZWVuIHByZWNvbmZpZ3VyZWQgZm9yIHlvdS48YnI+Qm90aCByb3V0ZXJzIGhhdmUgYSBsb29wYmFjayBpbnRlcmZhY2U6PGJyPlJvdXRlciBLaW5nOiBMMDogMS4xLjEuMSAvMzI8YnI+Um91dGVyIEtvbmc6IEwwOiAyLjIuMi4yIC8zMjxicj5Db25maWd1cmUgRUlHUlAgQVMgMTAwIG9uIGJvdGggcm91dGVycywgYWR2ZXJ0aXNlIGFsbCBuZXR3b3Jrcy48YnI+RW5zdXJlIHlvdSBoYXZlIGZ1bGwgcmVhY2hhYmlsaXR5IGFuZCBjYW4gcGluZyBib3RoIGxvb3BiYWNrcy48YnI+Q29uZmlndXJlIEJHUCBBUyAxMDAgb24gYm90aCByb3V0ZXJzLCBkbyBub3QgYWR2ZXJ0aXNlIGFueSBuZXR3b3Jrcy48YnI+TWFrZSBzdXJlIHRoYXQgd2hlbmV2ZXIgYSBzaW5nbGUgbGluayBnb2VzIGRvd24sIHRoZSBCR1AgbmVpZ2hib3IgcmVsYXRpb25zaGlwIHdpbGwgbm90IHJlc2V0IGl0c2VsZi48YnI+VHJ5IHRoaXMgYnkgZmlyc3Qgc2h1dHRpbmcgZG93biB0aGUgRmFzdEV0aGVybmV0IGxpbmssIGJyaW5nIGl0IGJhY2sgdXAgYW5kIHRoZW4gdHJ5IHRoZSBzZXJpYWwgbGluay48L3A+PGRpdiBjbGFzcz0idWktcmVzaXphYmxlLWhhbmRsZSB1aS1yZXNpemFibGUtZSIgc3R5bGU9InotaW5kZXg6IDkwOyIgYmlzX3NraW5fY2hlY2tlZD0iMSI+PC9kaXY+PGRpdiBjbGFzcz0idWktcmVzaXphYmxlLWhhbmRsZSB1aS1yZXNpemFibGUtcyIgc3R5bGU9InotaW5kZXg6IDkwOyIgYmlzX3NraW5fY2hlY2tlZD0iMSI+PC9kaXY+PGRpdiBjbGFzcz0idWktcmVzaXphYmxlLWhhbmRsZSB1aS1yZXNpemFibGUtc2UgdWktaWNvbiB1aS1pY29uLWdyaXBzbWFsbC1kaWFnb25hbC1zZSIgc3R5bGU9InotaW5kZXg6IDkwOyIgYmlzX3NraW5fY2hlY2tlZD0iMSI+PC9kaXY+PC9kaXY+</data>
+      </textobject>
+    </textobjects>
+  </objects>
+</lab>

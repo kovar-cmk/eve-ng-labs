@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<lab name="hsrpv2" version="1" scripttimeout="300" lock="0">
+  <topology>
+    <nodes>
+      <node id="1" name="NXOS1" type="qemu" template="nxosv9k" image="nxosv9k-nxosv.9.3.2" console="telnet" cpu="2" cpulimit="0" ram="5192" ethernet="8" uuid="f942c2cb-203f-4293-befa-b8501b60499b" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -enable-kvm" qemu_version="4.1.0" qemu_arch="x86_64" delay="0" icon="Nexus7K.png" config="0" left="822" top="153">
+        <interface id="1" name="E1/1" type="ethernet" network_id="1"/>
+      </node>
+      <node id="2" name="NXOS2" type="qemu" template="nxosv9k" image="nxosv9k-nxosv.9.3.2" console="telnet" cpu="2" cpulimit="0" ram="5192" ethernet="8" uuid="e65353c0-056b-42bb-be61-74e05937bbcc" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -enable-kvm" qemu_version="4.1.0" qemu_arch="x86_64" delay="0" icon="Nexus7K.png" config="0" left="819" top="369">
+        <interface id="1" name="E1/1" type="ethernet" network_id="2"/>
+      </node>
+      <node id="3" name="Switch" type="qemu" template="viosl2" image="viosl2-adventerprisek9-m.156-2.T" console="telnet" cpu="1" cpulimit="0" ram="512" ethernet="8" uuid="32d00ce4-42ac-4b8d-835e-d4aa513d062e" qemu_options="-machine type=pc,accel=kvm -serial mon:stdio -nographic -no-user-config -nodefaults -rtc base=utc -cpu host" qemu_version="2.12.0" qemu_arch="x86_64" delay="0" icon="Switch L3.png" config="0" left="606" top="273">
+        <interface id="0" name="Gi0/0" type="ethernet" network_id="1"/>
+        <interface id="1" name="Gi0/1" type="ethernet" network_id="2"/>
+        <interface id="2" name="Gi0/2" type="ethernet" network_id="3"/>
+        <interface id="3" name="Gi0/3" type="ethernet" network_id="4"/>
+      </node>
+      <node id="4" name="VPC" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="405" top="201">
+        <interface id="0" name="eth0" type="ethernet" network_id="3"/>
+      </node>
+      <node id="5" name="VPC" type="vpcs" template="vpcs" image="" ethernet="1" delay="0" icon="Desktop.png" config="0" left="393" top="381">
+        <interface id="0" name="eth0" type="ethernet" network_id="4"/>
+      </node>
+    </nodes>
+    <networks>
+      <network id="1" type="bridge" name="Net-Switchiface_0" left="315" top="310" visibility="0"/>
+      <network id="2" type="bridge" name="Net-Switchiface_1" left="408" top="310" visibility="0"/>
+      <network id="3" type="bridge" name="Net-Switchiface_2" left="370" top="310" visibility="0"/>
+      <network id="4" type="bridge" name="Net-Switchiface_3" left="353" top="313" visibility="0"/>
+    </networks>
+  </topology>
+</lab>
